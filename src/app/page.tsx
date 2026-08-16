@@ -200,7 +200,7 @@ export default async function Page() {
         </div>
 
         <a
-          href={process.env.NEXT_PUBLIC_ACADEMY_URL ?? '#'}
+          href={process.env.NEXT_PUBLIC_ACADEMY_URL ?? 'https://nextacademy.mykajabi.com/'}
           className="academy fade d6"
           target="_blank"
           rel="noopener noreferrer"

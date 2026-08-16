@@ -17,7 +17,9 @@ export default function Header({ current }: { current: 'home' | 'settings' }) {
 
   return (
     <header className="fade d1">
-      <LogoMark className="logo" />
+      <Link href="/" aria-label="ホームへ">
+        <LogoMark className="logo" />
+      </Link>
       <div className="head-right">
         <Link
           href="/settings"
@@ -26,7 +28,7 @@ export default function Header({ current }: { current: 'home' | 'settings' }) {
           <i className="ti ti-settings" aria-hidden="true" />
           SETTINGS
         </Link>
-        <button onClick={signOut} className="head-link" style={{ background: 'none', border: 'none', cursor: 'pointer', font: 'inherit' }}>
+        <button onClick={signOut} className="head-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit', fontSize: 11, letterSpacing: '0.1em', lineHeight: 'inherit' }}>
           <i className="ti ti-logout" aria-hidden="true" />
           LOGOUT
         </button>

@@ -20,6 +20,8 @@ export const MEMBER_FIELDS = {
   pointsLink: 'fldfQdoI30oyw1eQF',
   submissionsLink: 'fld7hll26QyLMeDgn',
   createdAt: 'fldd3zbJJUmBvzmuI',
+  boxFolder: 'fldXCCwr2ecx08jqd',
+  stripeCustomerId2: 'fldAu0TwZRN79J1zd',
 } as const;
 
 export const SUBMISSION_FIELDS = {
@@ -60,6 +62,7 @@ export async function findMemberByEmail(email: string): Promise<Member | null> {
     .select({
       filterByFormula: `LOWER({${MEMBER_FIELDS.email}}) = '${target}'`,
       maxRecords: 1,
+      returnFieldsByFieldId: true,
     })
     .firstPage();
 
@@ -74,8 +77,8 @@ export async function findMemberByEmail(email: string): Promise<Member | null> {
     fullName: String(record.get(MEMBER_FIELDS.fullName) ?? ''),
     email: String(record.get(MEMBER_FIELDS.email) ?? ''),
     plan: typeof plan === 'string' ? plan : String((plan as { name?: string })?.name ?? ''),
-    boxFolderUrl: (record.get('Box_Folder') as string) ?? null,
-    stripeCustomerId: (record.get('Stripe_Customer_ID') as string) ?? null,
+    boxFolderUrl: (record.get(MEMBER_FIELDS.boxFolder) as string) ?? null,
+    stripeCustomerId: (record.get(MEMBER_FIELDS.stripeCustomerId2) as string) ?? null,
     startedAt: (record.get(MEMBER_FIELDS.createdAt) as string) ?? null,
   };
 }
@@ -94,6 +97,7 @@ export async function hasSubmittedThisMonth(memberRecordId: string): Promise<{
         IS_AFTER({${SUBMISSION_FIELDS.submittedOn}}, '${from}')
       )`,
       maxRecords: 1,
+      returnFieldsByFieldId: true,
     })
     .firstPage();
 

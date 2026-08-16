@@ -55,6 +55,7 @@ export async function getPointSummary(memberRecordId: string): Promise<PointSumm
       filterByFormula: `FIND('${memberRecordId}', ARRAYJOIN({${POINT_FIELDS.memberLink}}))`,
       sort: [{ field: POINT_FIELDS.yearMonth, direction: 'desc' }],
       maxRecords: 24,
+      returnFieldsByFieldId: true,
     })
     .firstPage();
 
